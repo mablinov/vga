@@ -131,7 +131,14 @@ package body vga_util is
                 & ", namely " & positive'image(width)
                 & " * " & positive'image(height)
                 & " @ " & positive'image(refresh_rate)
+                & " - resorting to default 640 * 480 @ 60"
                 severity error;
+            return vga_sync_timings'(
+                frontporch => 16,
+                syncpulse => 96,
+                backporch => 48,
+                activevideo => 640
+            );
         end if;
     end function;
 
@@ -161,7 +168,14 @@ package body vga_util is
                 & ", namely " & positive'image(width)
                 & " * " & positive'image(height)
                 & " @ " & positive'image(refresh_rate)
+                & " - resorting to default 640 * 480 @ 60"
                 severity error;
+            return vga_sync_timings'(
+                frontporch => 16,
+                syncpulse => 96,
+                backporch => 48,
+                activevideo => 640
+            );
         end if;
     end function;
 
