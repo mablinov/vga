@@ -67,10 +67,8 @@ begin
 			if state_cntr = get_counter_limit(cur_state) then
     			cur_state <= get_next_state(cur_state);
 				state_cntr <= 0;
-				transition <= '1';
 			else
 				state_cntr <= state_cntr + 1;
-				transition <= '0';
 			end if;
 		end if;
 	end process;
@@ -84,5 +82,13 @@ begin
         end if;
 	end process;
 
+	emit_transition: process (cur_state, state_cntr)
+	begin
+	    if state_cntr = get_counter_limit(cur_state) then
+	        transition <= '1';
+	    else
+	        transition <= '0';
+        end if;
+    end process;
 end architecture;
 	
