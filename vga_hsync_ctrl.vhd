@@ -4,7 +4,7 @@ use ieee.numeric_std.all;
 
 use work.vga_util.all;
 
-entity vga_hsync is
+entity vga_hsync_ctrl is
 	generic	(
 	    timings: vga_sync_timings
 	);
@@ -16,21 +16,7 @@ entity vga_hsync is
 	);
 end entity;
 
-architecture behavioural of vga_hsync is
-	function int2slv(arg: integer; length: positive) return std_logic_vector is
-	begin return std_logic_vector(to_unsigned(arg, length)); end function;
-
-    function max4(a1: positive; a2: positive; a3: positive; a4: positive)
-        return positive
-    is
-        variable max12: positive := a1;
-        variable max34: positive := a3;
-    begin
-        if a1 > a2 then max12 := a1; else max12 := a2; end if;
-        if a3 > a4 then max34 := a3; else max34 := a4; end if;
-        if max12 > max34 then return max12; else return max34; end if;
-    end function;
-
+architecture behavioural of vga_hsync_ctrl is
 	function get_next_state(cur_state: vga_hstate) return vga_hstate is
     begin
 	    case cur_state is
@@ -51,10 +37,8 @@ architecture behavioural of vga_hsync is
 	    end case;
 	end function;
 
-	subtype hsync_counter_t is natural range 0 to max4(
-	    timings.frontporch, timings.syncpulse,
-	    timings.backporch, timings.activevideo
-	) - 1;
+	subtype hsync_counter_t is natural
+	    range 0 to get_greatest_delay(timings) - 1;
 
 	signal state_cntr: hsync_counter_t := 0;
 	signal cur_state: vga_hstate := HFrontPorch;

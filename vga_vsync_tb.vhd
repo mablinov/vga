@@ -36,7 +36,7 @@ begin
             severity warning;
     end process;
     
-    uut: vga_vsync
+    uut: vga_vsync_ctrl
     generic map (
         timings => get_vtimings_from_mode(640, 480, 60)
     ) port map (
