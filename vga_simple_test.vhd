@@ -19,7 +19,6 @@ end entity;
 
 architecture behavioural of vga_simple_test is
     signal pixel_clk: std_logic;
-    signal htransition, vtransition: std_logic;
     signal hstate: vga_hstate;
     signal vstate: vga_vstate;
 begin
@@ -34,10 +33,12 @@ begin
         mode => (width => 640, height => 480, refresh_rate => 60)
     ) port map (
         clk => pixel_clk,
+        en => '1',
+        reset => '0',
         hsync => vga_hs,
         vsync => vga_vs,
-        htransition => htransition,
-        vtransition => vtransition,
+        htimer => open,
+        vtimer => open,
         hstate => hstate,
         vstate => vstate
     );

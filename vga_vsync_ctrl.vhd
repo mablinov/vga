@@ -9,25 +9,15 @@ entity vga_vsync_ctrl is
 	    timings: vga_sync_timings
 	);
 	port (
-	    clk	: in std_logic;
-		vsync : out std_logic;
-		transition: out std_logic;
-		state: out vga_vstate
+	    clk, en, reset: in std_logic;
+		vsync: out std_logic := '0';
+		timer: out natural range 0 to get_max_timing(timings) - 1;
+		state: out vga_vstate := VFrontPorch
 	);
 end entity;
 
 architecture behavioural of vga_vsync_ctrl is
-	function get_next_state(cur_state: vga_vstate) return vga_vstate is
-    begin
-	    case cur_state is
-	        when VFrontPorch => return VSyncPulse;
-	        when VSyncPulse => return VBackPorch;
-	        when VBackPorch => return VActiveVideo;
-	        when VActiveVideo => return VFrontPorch;
-        end case;
-    end function;
-
-	function get_counter_limit(cur_state: vga_vstate) return natural is
+	function get_timer_limit(cur_state: vga_vstate) return natural is
 	begin
 	    case cur_state is
 		    when VFrontPorch => return timings.frontporch - 1;
@@ -37,42 +27,76 @@ architecture behavioural of vga_vsync_ctrl is
 	    end case;
 	end function;
 
-	subtype vsync_counter_t is natural
-	    range 0 to get_greatest_delay(timings) - 1;
-
-	signal state_cntr: vsync_counter_t := 0;
-	signal cur_state: vga_vstate := VFrontPorch;
+    signal timer_int: natural range 0 to get_max_timing(timings) - 1 := 0;
+	signal state_current, state_next: vga_vstate := VFrontPorch;
 begin
-	state <= cur_state;
+    timer <= timer_int;
+	state <= state_current;
 
-	state_machine: process (clk)
-	begin
-		if rising_edge(clk) then
-			if state_cntr = get_counter_limit(cur_state) then
-    			cur_state <= get_next_state(cur_state);
-				state_cntr <= 0;
-			else
-				state_cntr <= state_cntr + 1;
-			end if;
-		end if;
-	end process;
-	
-	emit_syncpulse: process (cur_state)
-	begin
-        if cur_state = VSyncPulse then
-            vsync <= '1';
-        else
-            vsync <= '0';
-        end if;
-	end process;
-	
-	emit_transition: process (cur_state, state_cntr)
-	begin
-	    if state_cntr = get_counter_limit(cur_state) then
-	        transition <= '1';
-	    else
-	        transition <= '0';
+    register_video_state: process (clk, en, reset, state_next)
+    begin
+        if rising_edge(clk) then
+            if reset = '1' then
+                state_current <= VFrontPorch;
+            elsif en = '1' then
+                state_current <= state_next;
+            end if;
         end if;
     end process;
+    
+    decide_next_state: process (state_current, timer_int)
+        variable timer_reached_limit: boolean :=
+            timer_int = get_timer_limit(state_current);
+    begin
+        if timer_reached_limit then
+            case state_current is
+                when VFrontPorch =>
+                    state_next <= VSyncPulse;
+                when VSyncPulse =>
+                    state_next <= VBackPorch;
+                when VBackPorch =>
+                    state_next <= VActiveVideo;
+                when VActiveVideo =>
+                    state_next <= VFrontPorch;
+            end case;
+        else
+            state_next <= state_current;
+        end if;
+    end process;
+
+    update_hsync_timer: process (clk, en, reset, state_current, timer_int)
+    begin
+        if rising_edge(clk) then
+            if reset = '1' then
+                timer_int <= 0;
+            elsif en = '1' then
+                if timer_int = get_timer_limit(state_current) then
+                    timer_int <= 0;
+                else
+                    timer_int <= timer_int + 1;
+                end if;
+            end if;
+        end if;
+    end process;
+	
+	emit_syncpulse: process (clk, en, reset, state_current, state_next, timer_int)
+        variable on_state_transition: boolean :=
+            timer_int = get_timer_limit(state_current);
+	begin
+	    if rising_edge(clk) then
+	        if reset = '1' then
+	            vsync <= '0';
+	        elsif en = '1' then
+                if on_state_transition then
+                    if state_next = VSyncPulse then
+                        vsync <= '1';
+                    else
+                        vsync <= '0';
+                    end if;
+                end if;
+            end if;
+        end if;
+	end process;
+
 end architecture;
 	

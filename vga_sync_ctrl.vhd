@@ -9,11 +9,14 @@ entity vga_sync_ctrl is
 	    mode: vga_videomode
     );
 	port (
-	    clk: in std_logic;
-		hsync: out std_logic;
-		vsync: out std_logic;
-		htransition: out std_logic;
-		vtransition: out std_logic;
+	    clk, en, reset: in std_logic;
+		hsync, vsync: out std_logic;
+        htimer: out natural range 0 to get_max_timing(
+            get_htimings_from_videomode(mode)
+        );
+        vtimer: out natural range 0 to get_max_timing(
+            get_vtimings_from_videomode(mode)
+        );
 		hstate: out vga_hstate;
 		vstate: out vga_vstate
 	);
@@ -26,8 +29,10 @@ begin
 	    timings => get_htimings_from_videomode(mode)
     ) port map (
 		clk => clk,
+		en => en,
+		reset => reset,
 		hsync => hsync,
-		transition => htransition,
+        timer => htimer,
 		state => hstate
 	);
 
@@ -36,8 +41,10 @@ begin
 	    timings => get_vtimings_from_videomode(mode)
 	) port map (
 		clk => clk,
+		en => en,
+		reset => reset,
 		vsync => vsync,
-        transition => vtransition,
+        timer => vtimer,
         state => vstate
 	);
 end architecture;

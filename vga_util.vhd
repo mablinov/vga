@@ -16,7 +16,7 @@ package vga_util is
         activevideo: positive;
     end record;
 
-    function get_greatest_delay(timings: vga_sync_timings)
+    function get_max_timing(timings: vga_sync_timings)
         return positive;
 
     function get_htimings_from_mode(width: positive; height: positive;
@@ -30,10 +30,7 @@ package vga_util is
         return vga_sync_timings;
 
 	function int2slv(arg: integer; length: positive) return std_logic_vector;
-
---	subtype vga_4bit_signal is integer range 0 to 15;
---	type vga_channel is (Red, Green, Blue);
---	type vga_4bit_pixel is array (vga_channel range Red to Blue) of vga_4bit_signal;
+	function slv2int(arg: std_logic_vector) return integer;
 	
 	type vga_state is (
 		HFrontPorch, HSyncPulse, HBackPorch, HActiveVideo,
@@ -42,16 +39,15 @@ package vga_util is
 	subtype vga_hstate is vga_state range HFrontPorch to HActiveVideo;
 	subtype vga_vstate is vga_state range VFrontPorch to VActiveVideo;
 
---	Component declarations:
     component vga_hsync_ctrl is
 	    generic	(
 	        timings: vga_sync_timings
 	    );
 	    port (
-	        clk	: in std_logic;
-		    hsync : out std_logic;
-		    transition: out std_logic;
-		    state: out vga_hstate
+	        clk, en, reset: in std_logic;
+		    hsync: out std_logic := '0';
+		    timer: out natural range 0 to get_max_timing(timings) - 1;
+		    state: out vga_hstate := HFrontPorch
 	    );
     end component;
 
@@ -60,10 +56,10 @@ package vga_util is
 	        timings: vga_sync_timings
 	    );
 	    port (
-	        clk	: in std_logic;
-		    vsync : out std_logic;
-		    transition: out std_logic;
-		    state: out vga_vstate
+	        clk, en, reset: in std_logic;
+		    vsync: out std_logic := '0';
+		    timer: out natural range 0 to get_max_timing(timings) - 1;
+		    state: out vga_vstate := VFrontPorch
 	    );
     end component;
 
@@ -72,11 +68,14 @@ package vga_util is
 	        mode: vga_videomode
         );
 	    port (
-	        clk: in std_logic;
-		    hsync: out std_logic;
-		    vsync: out std_logic;
-		    htransition: out std_logic;
-		    vtransition: out std_logic;
+	        clk, en, reset: in std_logic;
+		    hsync, vsync: out std_logic;
+            htimer: out natural range 0 to get_max_timing(
+                get_htimings_from_videomode(mode)
+            );
+            vtimer: out natural range 0 to get_max_timing(
+                get_vtimings_from_videomode(mode)
+            );
 		    hstate: out vga_hstate;
 		    vstate: out vga_vstate
 	    );
@@ -96,8 +95,13 @@ package body vga_util is
 	begin
 		return std_logic_vector(to_unsigned(arg, length));
 	end function;
+	
+	function slv2int(arg: std_logic_vector) return integer is
+	begin
+	    return to_integer(unsigned(arg));
+	end function;
 
-    function get_greatest_delay(timings: vga_sync_timings)
+    function get_max_timing(timings: vga_sync_timings)
         return positive
     is
         variable a1: positive := timings.frontporch;

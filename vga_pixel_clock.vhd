@@ -10,7 +10,6 @@ use unisim.vcomponents.all;
 --	clkout0_divide_f = 35.75
 --	divclk_divide = 1
 
-
 entity vga_pixel_clock is
 	port (
 	    clk: in std_logic;
