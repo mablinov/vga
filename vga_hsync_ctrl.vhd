@@ -51,7 +51,7 @@ begin
             if reset = '1' then
                 timer_int <= 0;
             elsif en = '1' then
-                if timer_int = get_timer_limit(timings, state_current) then
+                if timer_int >= get_timer_limit(timings, state_current) then
                     timer_int <= 0;
                 else
                     timer_int <= timer_int + 1;
