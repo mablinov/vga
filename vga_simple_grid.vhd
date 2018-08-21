@@ -18,6 +18,11 @@ entity vga_simple_grid is
 end entity;
 
 architecture behavioural of vga_simple_grid is
+	function int2slv(arg: integer; length: positive) return std_logic_vector is
+	begin
+		return std_logic_vector(to_unsigned(arg, length));
+	end function;
+
     signal pixel_clk: std_logic;
     signal hstate: vga_hstate;
     signal vstate: vga_vstate;
