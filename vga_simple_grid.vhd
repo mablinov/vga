@@ -71,7 +71,8 @@ begin
 
     sync_ctrl: vga_sync_ctrl
     generic map (
-        mode => (width => 640, height => 480, refresh_rate => 60)
+        timings => get_timings_from_videomode(width => 640, height => 480,
+            refresh_rate => 60)
     ) port map (
         clk => pixel_clk,
         en => '1',

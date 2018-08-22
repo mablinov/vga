@@ -9,25 +9,23 @@ package vga_util is
         refresh_rate: positive;
     end record;
 
---    type vga_sync_timings is record
---        frontporch: positive;
---        syncpulse: positive;
---        backporch: positive;
---        activevideo: positive;
---    end record;
-
     type vga_hsync_timings is record
-        hfrontporch: positive;
-        hsyncpulse: positive;
-        hbackporch: positive;
-        hactivevideo: positive;
+        frontporch: positive;
+        syncpulse: positive;
+        backporch: positive;
+        activevideo: positive;
     end record;
 
     type vga_vsync_timings is record
-        vfrontporch: positive;
-        vsyncpulse: positive;
-        vbackporch: positive;
-        vactivevideo: positive;
+        frontporch: positive;
+        syncpulse: positive;
+        backporch: positive;
+        activevideo: positive;
+    end record;
+
+    type vga_sync_timings is record
+        h: vga_hsync_timings;
+        v: vga_vsync_timings;
     end record;
 
     type vga_hstate is (HFrontPorch, HSyncPulse, HBackPorch, HActiveVideo);
@@ -36,22 +34,28 @@ package vga_util is
     function get_max_timing(timings: vga_hsync_timings) return positive;
     function get_max_timing(timings: vga_vsync_timings) return positive;
 
-    function get_htimings_from_mode(width: positive; height: positive;
+    function get_timings_from_videomode(width: positive; height: positive;
+        refresh_rate: positive) return vga_sync_timings;
+    function get_timings_from_videomode(mode: vga_videomode)
+        return vga_sync_timings;
+
+    function get_htimings_from_videomode(width: positive; height: positive;
         refresh_rate: positive) return vga_hsync_timings;
     function get_htimings_from_videomode(mode: vga_videomode)
         return vga_hsync_timings;
 	function get_timer_limit(timings: vga_hsync_timings; cur_state: vga_hstate)
 	    return positive;
-    function get_next_hstate(state: vga_hstate) return vga_hstate;
 
 
-    function get_vtimings_from_mode(width: positive; height: positive;
+    function get_vtimings_from_videomode(width: positive; height: positive;
         refresh_rate: positive) return vga_vsync_timings;
     function get_vtimings_from_videomode(mode: vga_videomode)
         return vga_vsync_timings;
 	function get_timer_limit(timings: vga_vsync_timings; cur_state: vga_vstate)
 	    return positive;
-    function get_next_vstate(state: vga_vstate) return vga_vstate;
+
+    function get_next_vga_state(state: vga_hstate) return vga_hstate;
+    function get_next_vga_state(state: vga_vstate) return vga_vstate;
 
     component vga_hsync_ctrl is
 	    generic	(
@@ -79,17 +83,13 @@ package vga_util is
 
     component vga_sync_ctrl is
 	    generic	(
-	        mode: vga_videomode
+	        timings: vga_sync_timings
         );
 	    port (
 	        clk, en, reset: in std_logic;
 		    hsync, vsync: out std_logic;
-            htimer: out natural range 0 to get_max_timing(
-                get_htimings_from_videomode(mode)
-            );
-            vtimer: out natural range 0 to get_max_timing(
-                get_vtimings_from_videomode(mode)
-            );
+            htimer: out natural range 0 to get_max_timing(timings.h);
+            vtimer: out natural range 0 to get_max_timing(timings.v);
 		    hstate: out vga_hstate;
 		    vstate: out vga_vstate
 	    );
@@ -108,10 +108,10 @@ package body vga_util is
     function get_max_timing(timings: vga_hsync_timings)
         return positive
     is
-        variable a1: positive := timings.hfrontporch;
-        variable a2: positive := timings.hsyncpulse;
-        variable a3: positive := timings.hbackporch;
-        variable a4: positive := timings.hactivevideo;
+        variable a1: positive := timings.frontporch;
+        variable a2: positive := timings.syncpulse;
+        variable a3: positive := timings.backporch;
+        variable a4: positive := timings.activevideo;
 
         variable max12: positive := a1;
         variable max34: positive := a3;
@@ -124,10 +124,10 @@ package body vga_util is
     function get_max_timing(timings: vga_vsync_timings)
         return positive
     is
-        variable a1: positive := timings.vfrontporch;
-        variable a2: positive := timings.vsyncpulse;
-        variable a3: positive := timings.vbackporch;
-        variable a4: positive := timings.vactivevideo;
+        variable a1: positive := timings.frontporch;
+        variable a2: positive := timings.syncpulse;
+        variable a3: positive := timings.backporch;
+        variable a4: positive := timings.activevideo;
 
         variable max12: positive := a1;
         variable max34: positive := a3;
@@ -137,7 +137,26 @@ package body vga_util is
         if max12 > max34 then return max12; else return max34; end if;
     end function;
 
-    function get_htimings_from_mode(width: positive; height: positive;
+    function get_timings_from_videomode(width: positive; height: positive;
+        refresh_rate: positive) return vga_sync_timings
+    is
+        variable ret: vga_sync_timings;
+    begin
+        ret.h := get_htimings_from_videomode(width, height, refresh_rate);
+        ret.v := get_vtimings_from_videomode(width, height, refresh_rate);
+        return ret;
+    end function;
+    
+    function get_timings_from_videomode(mode: vga_videomode)
+        return vga_sync_timings
+    is
+        variable ret: vga_sync_timings;
+    begin
+        ret.h := get_htimings_from_videomode(mode);
+        ret.v := get_vtimings_from_videomode(mode);
+    end function;
+
+    function get_htimings_from_videomode(width: positive; height: positive;
         refresh_rate: positive) return vga_hsync_timings
     is
         type triplet is array (natural range 0 to 2) of positive;
@@ -145,10 +164,10 @@ package body vga_util is
     begin
         if videomode = (640, 480, 60) then
             return vga_hsync_timings'(
-                hfrontporch => 16,
-                hsyncpulse => 96,
-                hbackporch => 48,
-                hactivevideo => 640
+                frontporch => 16,
+                syncpulse => 96,
+                backporch => 48,
+                activevideo => 640
             );
         else
             report "Invalid videomode submitted to 'get_htimings_from_mode'"
@@ -158,10 +177,10 @@ package body vga_util is
                 & " - resorting to default 640 * 480 @ 60"
                 severity error;
             return vga_hsync_timings'(
-                hfrontporch => 16,
-                hsyncpulse => 96,
-                hbackporch => 48,
-                hactivevideo => 640
+                frontporch => 16,
+                syncpulse => 96,
+                backporch => 48,
+                activevideo => 640
             );
         end if;
     end function;
@@ -169,7 +188,7 @@ package body vga_util is
     function get_htimings_from_videomode(mode: vga_videomode)
         return vga_hsync_timings is
     begin
-        return get_htimings_from_mode(mode.width, mode.height,
+        return get_htimings_from_videomode(mode.width, mode.height,
             mode.refresh_rate);
     end function;
 
@@ -178,14 +197,66 @@ package body vga_util is
     is
 	begin
 	    case cur_state is
-		    when HFrontPorch => return timings.hfrontporch - 1;
-		    when HSyncPulse => return timings.hsyncpulse - 1;
-		    when HBackPorch => return timings.hbackporch - 1;
-		    when HActiveVideo => return timings.hactivevideo - 1;
+		    when HFrontPorch => return timings.frontporch - 1;
+		    when HSyncPulse => return timings.syncpulse - 1;
+		    when HBackPorch => return timings.backporch - 1;
+		    when HActiveVideo => return timings.activevideo - 1;
 	    end case;
 	end function;
 
-    function get_next_hstate(state: vga_hstate) return vga_hstate is
+
+
+
+
+    function get_vtimings_from_videomode(width: positive; height: positive;
+        refresh_rate: positive) return vga_vsync_timings
+    is
+        type triplet is array (natural range 0 to 2) of positive;
+        variable videomode: triplet := (width, height, refresh_rate);
+    begin
+        if videomode = (640, 480, 60) then
+            return vga_vsync_timings'(
+                frontporch => 10 * 800,
+                syncpulse => 2 * 800,
+                backporch => 33 * 800,
+                activevideo => 480 * 800
+            );
+        else
+            report "Invalid videomode submitted to 'get_vtimings_from_mode'"
+                & ", namely " & positive'image(width)
+                & " * " & positive'image(height)
+                & " @ " & positive'image(refresh_rate)
+                & " - resorting to default 640 * 480 @ 60"
+                severity error;
+            return vga_vsync_timings'(
+                frontporch => 16,
+                syncpulse => 96,
+                backporch => 48,
+                activevideo => 640
+            );
+        end if;
+    end function;
+
+    function get_vtimings_from_videomode(mode: vga_videomode)
+        return vga_vsync_timings is
+    begin
+        return get_vtimings_from_videomode(mode.width, mode.height,
+            mode.refresh_rate);
+    end function;
+
+	function get_timer_limit(timings: vga_vsync_timings; cur_state: vga_vstate)
+	    return positive
+    is
+	begin
+	    case cur_state is
+		    when VFrontPorch => return timings.frontporch - 1;
+		    when VSyncPulse => return timings.syncpulse - 1;
+		    when VBackPorch => return timings.backporch - 1;
+		    when VActiveVideo => return timings.activevideo - 1;
+	    end case;
+	end function;
+
+    function get_next_vga_state(state: vga_hstate) return vga_hstate is
     begin
         case state is
             when HFrontPorch =>
@@ -199,57 +270,7 @@ package body vga_util is
         end case;
     end function;
 
-
-
-    function get_vtimings_from_mode(width: positive; height: positive;
-        refresh_rate: positive) return vga_vsync_timings
-    is
-        type triplet is array (natural range 0 to 2) of positive;
-        variable videomode: triplet := (width, height, refresh_rate);
-    begin
-        if videomode = (640, 480, 60) then
-            return vga_vsync_timings'(
-                vfrontporch => 10 * 800,
-                vsyncpulse => 2 * 800,
-                vbackporch => 33 * 800,
-                vactivevideo => 480 * 800
-            );
-        else
-            report "Invalid videomode submitted to 'get_vtimings_from_mode'"
-                & ", namely " & positive'image(width)
-                & " * " & positive'image(height)
-                & " @ " & positive'image(refresh_rate)
-                & " - resorting to default 640 * 480 @ 60"
-                severity error;
-            return vga_vsync_timings'(
-                vfrontporch => 16,
-                vsyncpulse => 96,
-                vbackporch => 48,
-                vactivevideo => 640
-            );
-        end if;
-    end function;
-
-    function get_vtimings_from_videomode(mode: vga_videomode)
-        return vga_vsync_timings is
-    begin
-        return get_vtimings_from_mode(mode.width, mode.height,
-            mode.refresh_rate);
-    end function;
-
-	function get_timer_limit(timings: vga_vsync_timings; cur_state: vga_vstate)
-	    return positive
-    is
-	begin
-	    case cur_state is
-		    when VFrontPorch => return timings.vfrontporch - 1;
-		    when VSyncPulse => return timings.vsyncpulse - 1;
-		    when VBackPorch => return timings.vbackporch - 1;
-		    when VActiveVideo => return timings.vactivevideo - 1;
-	    end case;
-	end function;
-
-    function get_next_vstate(state: vga_vstate) return vga_vstate is
+    function get_next_vga_state(state: vga_vstate) return vga_vstate is
     begin
         case state is
             when VFrontPorch =>

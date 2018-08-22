@@ -39,7 +39,7 @@ begin
             timer_int = get_timer_limit(timings, state_current);
     begin
         if timer_reached_limit then
-            state_next <= get_next_hstate(state_current);
+            state_next <= get_next_vga_state(state_current);
         else
             state_next <= state_current;
         end if;
