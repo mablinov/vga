@@ -6,7 +6,7 @@ use work.vga_util.all;
 
 entity vga_hstate_fsm is
     generic (
-	    timings: vga_hsync_timings
+	    timings: vga_hsync_timings;
         timer_init: natural := 0;
         state_init: vga_hstate := vga_hstate'left
     );
@@ -17,7 +17,7 @@ entity vga_hstate_fsm is
     );
 end entity;
 
-architecture behavioural of vga_hstate_fsm is
+architecture rtl of vga_hstate_fsm is
     signal timer_int: natural range 0 to get_max_timing(timings) - 1 := timer_init;
 	signal state_current, state_next: vga_hstate := state_init;
 begin
@@ -36,10 +36,8 @@ begin
     end process;
 
     decide_next_state: process (state_current, timer_int)
-        variable timer_reached_limit: boolean :=
-            timer_int = get_timer_limit(timings, state_current);
     begin
-        if timer_reached_limit then
+        if timer_int = get_timer_limit(timings, state_current) then
             state_next <= get_next_vga_state(state_current);
         else
             state_next <= state_current;

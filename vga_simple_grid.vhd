@@ -17,7 +17,7 @@ entity vga_simple_grid is
     );
 end entity;
 
-architecture behavioural of vga_simple_grid is
+architecture rtl of vga_simple_grid is
 	function int2slv(arg: integer; length: positive) return std_logic_vector is
 	begin
 		return std_logic_vector(to_unsigned(arg, length));

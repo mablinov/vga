@@ -1,0 +1,4 @@
+vhdl xil_defaultlib ../../vga_util.vhd
+vhdl xil_defaultlib ../../vga_hsync_ctrl.vhd
+vhdl xil_defaultlib ../tb/txt_util.vhd
+vhdl xil_defaultlib ../tb/vga_hsync_tb.vhd

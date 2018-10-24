@@ -154,6 +154,7 @@ package body vga_util is
     begin
         ret.h := get_htimings_from_videomode(mode);
         ret.v := get_vtimings_from_videomode(mode);
+        return ret;
     end function;
 
     function get_htimings_from_videomode(width: positive; height: positive;
@@ -229,10 +230,10 @@ package body vga_util is
                 & " - resorting to default 640 * 480 @ 60"
                 severity error;
             return vga_vsync_timings'(
-                frontporch => 16,
-                syncpulse => 96,
-                backporch => 48,
-                activevideo => 640
+                frontporch => 10 * 800,
+                syncpulse => 2 * 800,
+                backporch => 33 * 800,
+                activevideo => 480 * 800
             );
         end if;
     end function;

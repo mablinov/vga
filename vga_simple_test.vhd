@@ -17,7 +17,7 @@ entity vga_simple_test is
     );
 end entity;
 
-architecture behavioural of vga_simple_test is
+architecture rtl of vga_simple_test is
     signal pixel_clk: std_logic;
     signal hstate: vga_hstate;
     signal vstate: vga_vstate;

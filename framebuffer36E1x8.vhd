@@ -1,5 +1,6 @@
 library ieee;
 use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 
 Library UNISIM;
 use UNISIM.vcomponents.all;
@@ -37,7 +38,48 @@ entity framebuffer36E1x8 is
 	);
 end entity;
 
-architecture behavioural of framebuffer36E1x8 is
+architecture rtl of framebuffer36E1x8 is
+	type byte_vector is array (natural range 0 to 2 ** 12 - 1) of
+		std_logic_vector(7 downto 0);
+	
+	function get_init(offset: natural; vec: byte_vector)
+		return bit_vector(2 ** 7 - 1 downto 0)
+	is
+		variable ret_slv: std_logic_vector(2 ** 7 - 1 downto 0) := (others => '0');
+		variable ret: bit_vector(2 ** 7 - 1 downto 0) := (others => '0');
+		variable byte_offset: natural;
+	begin
+		byte_offset := offset * 16;
+	
+		for i in 0 to 15 loop
+			ret_slv((i+1)*8 - 1 downto i*8) := vec(byte_offset + i);
+		end loop;
+		
+		for i in ret'range loop
+			if ret_slv(i) = '0' then
+				ret(i) := '0';
+			else
+				ret(i) := '1';
+			end if;
+		end loop;
+	
+		return ret;
+	end function;
+	
+	function to_byte_vector(str: string) return byte_vector is
+		variable ret: byte_vector := (others => (others => '0'));
+	begin
+		assert str'length > ret'length report "String is too long to assign"
+			severity failure;
+	
+		for i in str'range loop
+			ret(i-1) := std_logic_vector(to_unsigned(character'pos(str(i)), 8));
+		end loop;
+		return ret;
+	end function;
+	
+	constant memtest: byte_vector := to_byte_vector("Hello, world...");
+	
 	-- A-side interface
 	signal ADDRA: std_logic_vector(15 downto 0) := (others => '0');
 	signal CLKA: std_logic := '0';
@@ -100,9 +142,12 @@ begin
 	
 	vram_buffer_1: RAMB36E1
 	generic map (
+--		INIT_00 => X"0000000000000000000000000000000000000000000000000000000074736574",
+--		INIT_00 => get_init(0, memtest),
+			
 		DOA_REG => 1,
 		DOB_REG => 1,
-		INIT_FILE => INIT_FILE,
+--		INIT_FILE => "/home/maxim/dev/hardware_description/util/vga/hello.mem",
 		
 		READ_WIDTH_A => 9,
 		READ_WIDTH_B => 9,

@@ -1,0 +1,4 @@
+vhdl xil_defaultlib ../../vga_util.vhd
+vhdl xil_defaultlib ../../vga_pixel_clock.vhd
+vhdl xil_defaultlib ../tb/txt_util.vhd
+vhdl xil_defaultlib ../tb/vga_pixel_clock_tb.vhd

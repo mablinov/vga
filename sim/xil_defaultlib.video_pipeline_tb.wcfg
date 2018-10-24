@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="xil_defaultlib.video_pipeline_tb.wdb" id="1">
+         <top_modules>
+            <top_module name="glyph_util" />
+            <top_module name="vga_util" />
+            <top_module name="video_pipeline_tb" />
+            <top_module name="vpkg" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="14649175109000fs"></ZoomStartTime>
+      <ZoomEndTime time="14649911109001fs"></ZoomEndTime>
+      <Cursor1Time time="14649731109000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="219"></NameColumnWidth>
+      <ValueColumnWidth column_width="63"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="10" />
+   <wvobject type="logic" fp_name="/video_pipeline_tb/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/video_pipeline_tb/vga_r">
+      <obj_property name="ElementShortName">vga_r[3:0]</obj_property>
+      <obj_property name="ObjectShortName">vga_r[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/video_pipeline_tb/vga_g">
+      <obj_property name="ElementShortName">vga_g[3:0]</obj_property>
+      <obj_property name="ObjectShortName">vga_g[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/video_pipeline_tb/vga_b">
+      <obj_property name="ElementShortName">vga_b[3:0]</obj_property>
+      <obj_property name="ObjectShortName">vga_b[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/vs_fsm/h_fsm/state">
+      <obj_property name="ElementShortName">state</obj_property>
+      <obj_property name="ObjectShortName">state</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/vs_fsm/v_fsm/state">
+      <obj_property name="ElementShortName">state</obj_property>
+      <obj_property name="ObjectShortName">state</obj_property>
+   </wvobject>
+   <wvobject type="group" fp_name="group35">
+      <obj_property name="label">h_fsm</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="logic" fp_name="/video_pipeline_tb/video_pipeline_inst/vs_fsm/h_fsm/clk">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/video_pipeline_tb/video_pipeline_inst/vs_fsm/h_fsm/en">
+         <obj_property name="ElementShortName">en</obj_property>
+         <obj_property name="ObjectShortName">en</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/video_pipeline_tb/video_pipeline_inst/vs_fsm/h_fsm/reset">
+         <obj_property name="ElementShortName">reset</obj_property>
+         <obj_property name="ObjectShortName">reset</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/vs_fsm/h_fsm/timer">
+         <obj_property name="ElementShortName">timer</obj_property>
+         <obj_property name="ObjectShortName">timer</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/vs_fsm/h_fsm/state">
+         <obj_property name="ElementShortName">state</obj_property>
+         <obj_property name="ObjectShortName">state</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/vs_fsm/h_fsm/timer_int">
+         <obj_property name="ElementShortName">timer_int</obj_property>
+         <obj_property name="ObjectShortName">timer_int</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/vs_fsm/h_fsm/state_current">
+         <obj_property name="ElementShortName">state_current</obj_property>
+         <obj_property name="ObjectShortName">state_current</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/vs_fsm/h_fsm/state_next">
+         <obj_property name="ElementShortName">state_next</obj_property>
+         <obj_property name="ObjectShortName">state_next</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/video_pipeline_tb/video_pipeline_inst/vs_fsm/h_fsm/timings">
+         <obj_property name="ElementShortName">timings</obj_property>
+         <obj_property name="ObjectShortName">timings</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/vs_fsm/h_fsm/timer_init">
+         <obj_property name="ElementShortName">timer_init</obj_property>
+         <obj_property name="ObjectShortName">timer_init</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/vs_fsm/h_fsm/state_init">
+         <obj_property name="ElementShortName">state_init</obj_property>
+         <obj_property name="ObjectShortName">state_init</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group47">
+      <obj_property name="label">v_fsm</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="logic" fp_name="/video_pipeline_tb/video_pipeline_inst/vs_fsm/v_fsm/clk">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/video_pipeline_tb/video_pipeline_inst/vs_fsm/v_fsm/en">
+         <obj_property name="ElementShortName">en</obj_property>
+         <obj_property name="ObjectShortName">en</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/video_pipeline_tb/video_pipeline_inst/vs_fsm/v_fsm/reset">
+         <obj_property name="ElementShortName">reset</obj_property>
+         <obj_property name="ObjectShortName">reset</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/vs_fsm/v_fsm/timer">
+         <obj_property name="ElementShortName">timer</obj_property>
+         <obj_property name="ObjectShortName">timer</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/vs_fsm/v_fsm/state">
+         <obj_property name="ElementShortName">state</obj_property>
+         <obj_property name="ObjectShortName">state</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/vs_fsm/v_fsm/timer_int">
+         <obj_property name="ElementShortName">timer_int</obj_property>
+         <obj_property name="ObjectShortName">timer_int</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/vs_fsm/v_fsm/state_current">
+         <obj_property name="ElementShortName">state_current</obj_property>
+         <obj_property name="ObjectShortName">state_current</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/vs_fsm/v_fsm/state_next">
+         <obj_property name="ElementShortName">state_next</obj_property>
+         <obj_property name="ObjectShortName">state_next</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/video_pipeline_tb/video_pipeline_inst/vs_fsm/v_fsm/timings">
+         <obj_property name="ElementShortName">timings</obj_property>
+         <obj_property name="ObjectShortName">timings</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/vs_fsm/v_fsm/timer_init">
+         <obj_property name="ElementShortName">timer_init</obj_property>
+         <obj_property name="ObjectShortName">timer_init</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/vs_fsm/v_fsm/state_init">
+         <obj_property name="ElementShortName">state_init</obj_property>
+         <obj_property name="ObjectShortName">state_init</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group97">
+      <obj_property name="label">cau</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject type="logic" fp_name="/video_pipeline_tb/video_pipeline_inst/cau_inst/clk">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/video_pipeline_tb/video_pipeline_inst/cau_inst/en">
+         <obj_property name="ElementShortName">en</obj_property>
+         <obj_property name="ObjectShortName">en</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/video_pipeline_tb/video_pipeline_inst/cau_inst/reset">
+         <obj_property name="ElementShortName">reset</obj_property>
+         <obj_property name="ObjectShortName">reset</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/cau_inst/hstate">
+         <obj_property name="ElementShortName">hstate</obj_property>
+         <obj_property name="ObjectShortName">hstate</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/cau_inst/vstate">
+         <obj_property name="ElementShortName">vstate</obj_property>
+         <obj_property name="ObjectShortName">vstate</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/cau_inst/incr_frame">
+         <obj_property name="ElementShortName">incr_frame</obj_property>
+         <obj_property name="ObjectShortName">incr_frame</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/cau_inst/incr_char_y">
+         <obj_property name="ElementShortName">incr_char_y</obj_property>
+         <obj_property name="ObjectShortName">incr_char_y</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/cau_inst/incr_pixel_y">
+         <obj_property name="ElementShortName">incr_pixel_y</obj_property>
+         <obj_property name="ObjectShortName">incr_pixel_y</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/cau_inst/incr_char_x">
+         <obj_property name="ElementShortName">incr_char_x</obj_property>
+         <obj_property name="ObjectShortName">incr_char_x</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/cau_inst/addr_offset">
+         <obj_property name="ElementShortName">addr_offset</obj_property>
+         <obj_property name="ObjectShortName">addr_offset</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/cau_inst/bank_offset">
+         <obj_property name="ElementShortName">bank_offset</obj_property>
+         <obj_property name="ObjectShortName">bank_offset</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/video_pipeline_tb/video_pipeline_inst/cau_inst/offset_reg_ce">
+         <obj_property name="ElementShortName">offset_reg_ce</obj_property>
+         <obj_property name="ObjectShortName">offset_reg_ce</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/cau_inst/mem_addr">
+         <obj_property name="ElementShortName">mem_addr</obj_property>
+         <obj_property name="ObjectShortName">mem_addr</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/cau_inst/mem_bank">
+         <obj_property name="ElementShortName">mem_bank</obj_property>
+         <obj_property name="ObjectShortName">mem_bank</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/cau_inst/int_mem_addr">
+         <obj_property name="ElementShortName">int_mem_addr</obj_property>
+         <obj_property name="ObjectShortName">int_mem_addr</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/cau_inst/int_mem_bank">
+         <obj_property name="ElementShortName">int_mem_bank</obj_property>
+         <obj_property name="ObjectShortName">int_mem_bank</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/cau_inst/start_line_mem_addr">
+         <obj_property name="ElementShortName">start_line_mem_addr</obj_property>
+         <obj_property name="ObjectShortName">start_line_mem_addr</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/cau_inst/start_line_mem_bank">
+         <obj_property name="ElementShortName">start_line_mem_bank</obj_property>
+         <obj_property name="ObjectShortName">start_line_mem_bank</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/cau_inst/int_mem_addr_offset">
+         <obj_property name="ElementShortName">int_mem_addr_offset</obj_property>
+         <obj_property name="ObjectShortName">int_mem_addr_offset</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/cau_inst/int_mem_bank_offset">
+         <obj_property name="ElementShortName">int_mem_bank_offset</obj_property>
+         <obj_property name="ObjectShortName">int_mem_bank_offset</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/cau_inst/MEM_BYTES">
+         <obj_property name="ElementShortName">MEM_BYTES</obj_property>
+         <obj_property name="ObjectShortName">MEM_BYTES</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/cau_inst/MEM_BANKS">
+         <obj_property name="ElementShortName">MEM_BANKS</obj_property>
+         <obj_property name="ObjectShortName">MEM_BANKS</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group98">
+      <obj_property name="label">vtfc</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject type="logic" fp_name="/video_pipeline_tb/video_pipeline_inst/vtfc_inst/clk">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/video_pipeline_tb/video_pipeline_inst/vtfc_inst/en">
+         <obj_property name="ElementShortName">en</obj_property>
+         <obj_property name="ObjectShortName">en</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/video_pipeline_tb/video_pipeline_inst/vtfc_inst/reset">
+         <obj_property name="ElementShortName">reset</obj_property>
+         <obj_property name="ObjectShortName">reset</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/vtfc_inst/hstate">
+         <obj_property name="ElementShortName">hstate</obj_property>
+         <obj_property name="ObjectShortName">hstate</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/vtfc_inst/vstate">
+         <obj_property name="ElementShortName">vstate</obj_property>
+         <obj_property name="ObjectShortName">vstate</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/vtfc_inst/pixel_local_x">
+         <obj_property name="ElementShortName">pixel_local_x</obj_property>
+         <obj_property name="ObjectShortName">pixel_local_x</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/vtfc_inst/char_x">
+         <obj_property name="ElementShortName">char_x</obj_property>
+         <obj_property name="ObjectShortName">char_x</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/vtfc_inst/pixel_local_y">
+         <obj_property name="ElementShortName">pixel_local_y</obj_property>
+         <obj_property name="ObjectShortName">pixel_local_y</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/vtfc_inst/char_y">
+         <obj_property name="ElementShortName">char_y</obj_property>
+         <obj_property name="ObjectShortName">char_y</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/vtfc_inst/incr_pixel_x">
+         <obj_property name="ElementShortName">incr_pixel_x</obj_property>
+         <obj_property name="ObjectShortName">incr_pixel_x</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/vtfc_inst/incr_char_x">
+         <obj_property name="ElementShortName">incr_char_x</obj_property>
+         <obj_property name="ObjectShortName">incr_char_x</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/vtfc_inst/incr_pixel_y">
+         <obj_property name="ElementShortName">incr_pixel_y</obj_property>
+         <obj_property name="ObjectShortName">incr_pixel_y</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/vtfc_inst/incr_char_y">
+         <obj_property name="ElementShortName">incr_char_y</obj_property>
+         <obj_property name="ObjectShortName">incr_char_y</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/vtfc_inst/incr_frame">
+         <obj_property name="ElementShortName">incr_frame</obj_property>
+         <obj_property name="ObjectShortName">incr_frame</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/vtfc_inst/int_pixel_local_x">
+         <obj_property name="ElementShortName">int_pixel_local_x</obj_property>
+         <obj_property name="ObjectShortName">int_pixel_local_x</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/vtfc_inst/int_char_x">
+         <obj_property name="ElementShortName">int_char_x</obj_property>
+         <obj_property name="ObjectShortName">int_char_x</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/vtfc_inst/int_pixel_local_y">
+         <obj_property name="ElementShortName">int_pixel_local_y</obj_property>
+         <obj_property name="ObjectShortName">int_pixel_local_y</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/vtfc_inst/int_char_y">
+         <obj_property name="ElementShortName">int_char_y</obj_property>
+         <obj_property name="ObjectShortName">int_char_y</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/vtfc_inst/int_incr_pixel_x">
+         <obj_property name="ElementShortName">int_incr_pixel_x</obj_property>
+         <obj_property name="ObjectShortName">int_incr_pixel_x</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/vtfc_inst/int_incr_char_x">
+         <obj_property name="ElementShortName">int_incr_char_x</obj_property>
+         <obj_property name="ObjectShortName">int_incr_char_x</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/vtfc_inst/int_incr_pixel_y">
+         <obj_property name="ElementShortName">int_incr_pixel_y</obj_property>
+         <obj_property name="ObjectShortName">int_incr_pixel_y</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/vtfc_inst/int_incr_char_y">
+         <obj_property name="ElementShortName">int_incr_char_y</obj_property>
+         <obj_property name="ObjectShortName">int_incr_char_y</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/vtfc_inst/int_incr_frame">
+         <obj_property name="ElementShortName">int_incr_frame</obj_property>
+         <obj_property name="ObjectShortName">int_incr_frame</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/video_pipeline_tb/video_pipeline_inst/vtfc_inst/videomode">
+         <obj_property name="ElementShortName">videomode</obj_property>
+         <obj_property name="ObjectShortName">videomode</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/vtfc_inst/CHAR_WIDTH">
+         <obj_property name="ElementShortName">CHAR_WIDTH</obj_property>
+         <obj_property name="ObjectShortName">CHAR_WIDTH</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/vtfc_inst/CHAR_HEIGHT">
+         <obj_property name="ElementShortName">CHAR_HEIGHT</obj_property>
+         <obj_property name="ObjectShortName">CHAR_HEIGHT</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/vtfc_inst/TXT_DISP_WIDTH">
+         <obj_property name="ElementShortName">TXT_DISP_WIDTH</obj_property>
+         <obj_property name="ObjectShortName">TXT_DISP_WIDTH</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/video_pipeline_tb/video_pipeline_inst/vtfc_inst/TXT_DISP_HEIGHT">
+         <obj_property name="ElementShortName">TXT_DISP_HEIGHT</obj_property>
+         <obj_property name="ObjectShortName">TXT_DISP_HEIGHT</obj_property>
+      </wvobject>
+   </wvobject>
+</wave_config>

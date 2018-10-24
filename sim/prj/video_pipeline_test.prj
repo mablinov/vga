@@ -1,0 +1,15 @@
+vhdl xil_defaultlib ../../vga_util.vhd
+vhdl xil_defaultlib ../../vga_pixel_clock.vhd
+vhdl xil_defaultlib ../../vga_hsync_ctrl.vhd
+vhdl xil_defaultlib ../../vga_vsync_ctrl.vhd
+vhdl xil_defaultlib ../../vga_sync_ctrl.vhd
+
+vhdl xil_defaultlib ../../vga_hstate_fsm.vhd
+vhdl xil_defaultlib ../../vga_vstate_fsm.vhd
+vhdl xil_defaultlib ../../vga_state_fsm.vhd
+
+vhdl xil_defaultlib ../../../glyph/glyph_util.vhd
+
+vhdl xil_defaultlib ../../vga_text_frame_counter.vhd
+vhdl xil_defaultlib ../../video_pipeline.vhd
+vhdl xil_defaultlib ../../video_pipeline_test.vhd

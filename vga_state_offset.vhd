@@ -31,7 +31,7 @@ entity vga_state_offset is
     );
 end entity;
 
-architecture behavioural of vga_state_offset is
+architecture rtl of vga_state_offset is
 begin
 
 end architecture;

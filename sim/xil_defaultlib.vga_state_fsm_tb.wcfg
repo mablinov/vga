@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="xil_defaultlib.vga_state_fsm_tb.wdb" id="1">
+         <top_modules>
+            <top_module name="vga_state_fsm_tb" />
+            <top_module name="vga_util" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="7301fs"></ZoomEndTime>
+      <Cursor1Time time="0fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="143"></NameColumnWidth>
+      <ValueColumnWidth column_width="145"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="38" />
+   <wvobject type="logic" fp_name="/vga_state_fsm_tb/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/vga_state_fsm_tb/en">
+      <obj_property name="ElementShortName">en</obj_property>
+      <obj_property name="ObjectShortName">en</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/vga_state_fsm_tb/reset">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/vga_state_fsm_tb/htimer">
+      <obj_property name="ElementShortName">htimer</obj_property>
+      <obj_property name="ObjectShortName">htimer</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/vga_state_fsm_tb/hstate">
+      <obj_property name="ElementShortName">hstate</obj_property>
+      <obj_property name="ObjectShortName">hstate</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/vga_state_fsm_tb/vtimer">
+      <obj_property name="ElementShortName">vtimer</obj_property>
+      <obj_property name="ObjectShortName">vtimer</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/vga_state_fsm_tb/vstate">
+      <obj_property name="ElementShortName">vstate</obj_property>
+      <obj_property name="ObjectShortName">vstate</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/vga_state_fsm_tb/timings">
+      <obj_property name="ElementShortName">timings</obj_property>
+      <obj_property name="ObjectShortName">timings</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/vga_state_fsm_tb/htimer_init">
+      <obj_property name="ElementShortName">htimer_init</obj_property>
+      <obj_property name="ObjectShortName">htimer_init</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/vga_state_fsm_tb/hstate_init">
+      <obj_property name="ElementShortName">hstate_init</obj_property>
+      <obj_property name="ObjectShortName">hstate_init</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/vga_state_fsm_tb/vtimer_init">
+      <obj_property name="ElementShortName">vtimer_init</obj_property>
+      <obj_property name="ObjectShortName">vtimer_init</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/vga_state_fsm_tb/vstate_init">
+      <obj_property name="ElementShortName">vstate_init</obj_property>
+      <obj_property name="ObjectShortName">vstate_init</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider49" type="divider">
+      <obj_property name="label">h</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/vga_state_fsm_tb/h_fsm/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/vga_state_fsm_tb/h_fsm/en">
+      <obj_property name="ElementShortName">en</obj_property>
+      <obj_property name="ObjectShortName">en</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/vga_state_fsm_tb/h_fsm/reset">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/vga_state_fsm_tb/h_fsm/timer">
+      <obj_property name="ElementShortName">timer</obj_property>
+      <obj_property name="ObjectShortName">timer</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/vga_state_fsm_tb/h_fsm/state">
+      <obj_property name="ElementShortName">state</obj_property>
+      <obj_property name="ObjectShortName">state</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/vga_state_fsm_tb/h_fsm/timer_int">
+      <obj_property name="ElementShortName">timer_int</obj_property>
+      <obj_property name="ObjectShortName">timer_int</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/vga_state_fsm_tb/h_fsm/state_current">
+      <obj_property name="ElementShortName">state_current</obj_property>
+      <obj_property name="ObjectShortName">state_current</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/vga_state_fsm_tb/h_fsm/state_next">
+      <obj_property name="ElementShortName">state_next</obj_property>
+      <obj_property name="ObjectShortName">state_next</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/vga_state_fsm_tb/h_fsm/timings">
+      <obj_property name="ElementShortName">timings</obj_property>
+      <obj_property name="ObjectShortName">timings</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/vga_state_fsm_tb/h_fsm/timer_init">
+      <obj_property name="ElementShortName">timer_init</obj_property>
+      <obj_property name="ObjectShortName">timer_init</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/vga_state_fsm_tb/h_fsm/state_init">
+      <obj_property name="ElementShortName">state_init</obj_property>
+      <obj_property name="ObjectShortName">state_init</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider61" type="divider">
+      <obj_property name="label">v</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/vga_state_fsm_tb/v_fsm/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/vga_state_fsm_tb/v_fsm/en">
+      <obj_property name="ElementShortName">en</obj_property>
+      <obj_property name="ObjectShortName">en</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/vga_state_fsm_tb/v_fsm/reset">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/vga_state_fsm_tb/v_fsm/timer">
+      <obj_property name="ElementShortName">timer</obj_property>
+      <obj_property name="ObjectShortName">timer</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/vga_state_fsm_tb/v_fsm/state">
+      <obj_property name="ElementShortName">state</obj_property>
+      <obj_property name="ObjectShortName">state</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/vga_state_fsm_tb/v_fsm/timer_int">
+      <obj_property name="ElementShortName">timer_int</obj_property>
+      <obj_property name="ObjectShortName">timer_int</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/vga_state_fsm_tb/v_fsm/state_current">
+      <obj_property name="ElementShortName">state_current</obj_property>
+      <obj_property name="ObjectShortName">state_current</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/vga_state_fsm_tb/v_fsm/state_next">
+      <obj_property name="ElementShortName">state_next</obj_property>
+      <obj_property name="ObjectShortName">state_next</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/vga_state_fsm_tb/v_fsm/current_timer_limit">
+      <obj_property name="ElementShortName">current_timer_limit</obj_property>
+      <obj_property name="ObjectShortName">current_timer_limit</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/vga_state_fsm_tb/v_fsm/reached_limit">
+      <obj_property name="ElementShortName">reached_limit</obj_property>
+      <obj_property name="ObjectShortName">reached_limit</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/vga_state_fsm_tb/v_fsm/timings">
+      <obj_property name="ElementShortName">timings</obj_property>
+      <obj_property name="ObjectShortName">timings</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/vga_state_fsm_tb/v_fsm/timer_init">
+      <obj_property name="ElementShortName">timer_init</obj_property>
+      <obj_property name="ObjectShortName">timer_init</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/vga_state_fsm_tb/v_fsm/state_init">
+      <obj_property name="ElementShortName">state_init</obj_property>
+      <obj_property name="ObjectShortName">state_init</obj_property>
+   </wvobject>
+</wave_config>

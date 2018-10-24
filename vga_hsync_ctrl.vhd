@@ -16,7 +16,7 @@ entity vga_hsync_ctrl is
 	);
 end entity;
 
-architecture behavioural of vga_hsync_ctrl is
+architecture rtl of vga_hsync_ctrl is
     signal timer_int: natural range 0 to get_max_timing(timings) - 1 := 0;
 	signal state_current, state_next: vga_hstate := vga_hstate'left;
 begin

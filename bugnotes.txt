@@ -1,0 +1,100 @@
+i fixed some real nasty bugs
+
+	set_incr_vars: process (int_pixel_local_x, int_char_x, int_pixel_local_y,
+		int_char_y, int_mem_addr, hstate, vstate) is
+	begin
+		if hstate = HActiveVideo and vstate = VActiveVideo then
+			if int_pixel_local_x = CHAR_WIDTH - 1 then
+				incr_char_x <= true;
+			else
+				incr_char_x <= false;
+			end if;
+
+			if incr_char_x and int_char_x = TXT_DISP_WIDTH - 1 then
+				incr_pixel_local_y <= true;
+			else
+				incr_pixel_local_y <= false;
+			end if;
+
+			if incr_pixel_local_y and int_pixel_local_y = CHAR_HEIGHT - 1 then
+				incr_char_y <= true;
+			else
+				incr_char_y <= false;
+			end if;
+
+			if incr_char_x and int_mem_addr = MEM_BYTES - 1 then
+				incr_mem_bank <= true;
+			else
+				incr_mem_bank <= false;
+			end if;
+		else
+			incr_char_x <= false;
+			incr_pixel_local_y <= false;
+			incr_char_y <= false;
+			incr_mem_bank <= false;
+		end if;
+	end process;
+	
+	see the pre-anding expression? those weren't there, before which
+	they would just fire off for however long that the previous statement
+	didnt update. would have never seen this had i not pushed it through 
+	the simulator.
+	i guess testing really is a neccesary evil.
+	
+	another nasty bug in the char address unit regarding bank settings.
+	
+	evil alert:
+	these 2 snippets are not equivalent despite appearances:
+	
+	if rising_edge(pixel_clk) then
+		if have_new_char(pipeline(2)) then
+			scratchpad.glyph <= get_gb(char);
+		end if;
+	end if;
+	
+	if rising_edge(pixel_clk) and have_new_char(pipeline(2)) then
+		scratchpad.glyph <= get_gb(char);
+	end if;
+	
+	the reason is, ofcourse, is the above 'and' statement is not logical, but
+	of 'std_logic' type, and thus causes gated clock DRC warnings to occur.
+	
+	The correct version would be
+	
+	if rising_edge(pixel_clk) and have_new_char(pipeline(2)) = '1' then
+		scratchpad.glyph <= get_gb(char);
+	end if;
+	
+	**NEVERMIND**, the above are both boolean.
+	in that case, i really dont know. the only explanation is that whether or
+	not you embed or not the cond actually matters.
+	
+	found missing pixel on "y":
+		constant bitmap_Yu: glyph_bitmap := (
+		"10000010",
+		"10000010",
+		"01000100",
+		"00111010",
+		"00010000",
+		"00010000",
+		"00010000",
+		"00000000"
+	);
+	
+	another missing pixel on '$':
+		constant bitmap_DOLLAR: glyph_bitmap := (
+		"00010000",
+		"01111100",
+		"10000000",
+		"01111000",
+		"00000010",
+		"01111100",
+		"00010000",
+		"00000000"
+	);
+	
+	I also fixed the caret symbol from looking too much like a vertical
+	curly brace.
+	I think that the less-than/larger-than symbols could do with a similar
+	treatment, but i'll leave them be for now.
+	

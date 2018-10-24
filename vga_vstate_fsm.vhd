@@ -6,7 +6,7 @@ use work.vga_util.all;
 
 entity vga_vstate_fsm is
     generic (
-	    timings: vga_vsync_timings
+	    timings: vga_vsync_timings;
         timer_init: natural := 0;
         state_init: vga_vstate := vga_vstate'left
     );
@@ -17,14 +17,14 @@ entity vga_vstate_fsm is
     );
 end entity;
 
-architecture behavioural of vga_hstate_fsm is
+architecture rtl of vga_vstate_fsm is
     signal timer_int: natural range 0 to get_max_timing(timings) - 1 := timer_init;
 	signal state_current, state_next: vga_vstate := state_init;
 begin
     timer <= timer_int;
 	state <= state_current;
 
-    register_video_state: process (clk, en, reset, state_next)
+	register_video_state: process (clk, en, reset, state_next)
     begin
         if rising_edge(clk) then
             if reset = '1' then
@@ -36,10 +36,8 @@ begin
     end process;
     
     decide_next_state: process (state_current, timer_int)
-        variable timer_reached_limit: boolean :=
-            timer_int = get_timer_limit(timings, state_current);
     begin
-        if timer_reached_limit then
+		if timer_int = get_timer_limit(timings, state_current) then
             state_next <= get_next_vga_state(state_current);
         else
             state_next <= state_current;
